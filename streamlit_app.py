@@ -9,7 +9,7 @@ from datetime import datetime
 # Configure page
 st.set_page_config(page_title="NAFPD Risk Assessment", layout="centered")
 
-st.title("Non-alcoholic fatty pancreatic disease (NAFPD) Risk Assessment Tool")
+st.title("Fatty Pancreas Disease (FPD) Risk Assessment Tool")
 
 # Section 1: Select Gender
 st.header("Section 1: Select Gender")
