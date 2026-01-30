@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import plotly.graph_objects as go
-from xhtml2pdf import pisa
+# from xhtml2pdf import pisa
 from io import BytesIO
 import base64
 from datetime import datetime
@@ -91,22 +91,3 @@ contrib = [c * v for c, v in zip(coeffs, values)]
 chart = go.Figure(go.Bar(y=factors, x=contrib, orientation='h', text=[f"{c:.2f}" for c in contrib], textposition='outside'))
 chart.update_layout(xaxis_title="Contribution")
 st.plotly_chart(chart, use_container_width=True)
-
-# PDF Report
-def generate_pdf(age, fpg, ggt, waist, bmi, trig, nlr, ast, alt, platelet, fli, mfib4, prob, gender):
-    html = f"""
-    <html><body><h2>NAFPancreas Risk Report</h2><p>Generated: {datetime.now()}</p>
-    <h3>Inputs</h3><ul>
-    <li>Gender: {gender}</li><li>Age: {age}</li><li>FPG: {fpg}</li><li>GGT: {ggt}</li>
-    <li>Waist: {waist}</li><li>BMI: {bmi}</li><li>Triglycerides: {trig}</li><li>NLR: {nlr}</li>
-    <li>AST: {ast}</li><li>ALT: {alt}</li><li>Platelet: {platelet}</li></ul>
-    <h3>Results</h3><ul><li>FLI: {fli:.2f}</li><li>mFIB-4: {mfib4:.2f}</li>
-    <li>Risk Probability: {prob*100:.1f}%</li></ul></body></html>"""
-    buf = BytesIO(); pisa.CreatePDF(BytesIO(html.encode()), dest=buf)
-    b64 = base64.b64encode(buf.getvalue()).decode()
-    return f"<a href='data:application/pdf;base64,{b64}' download='report.pdf'>Download PDF</a>"
-
-st.markdown("---")
-st.subheader("Export Report")
-link = generate_pdf(age, fpg, ggt, waist, bmi, triglycerides, nlr, ast, alt, platelet, fli, mfib4, prob, gender)
-st.markdown(link, unsafe_allow_html=True)
