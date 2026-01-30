@@ -7,7 +7,7 @@ import base64
 from datetime import datetime
 
 # Configure page
-st.set_page_config(page_title="NAFPD Risk Assessment", layout="centered")
+st.set_page_config(page_title="FPD Risk Assessment", layout="centered")
 
 st.title("Fatty Pancreas Disease (FPD) Risk Assessment Tool")
 
